@@ -1,23 +1,30 @@
-
 ## TLDR ##
 # To Run the Development Backend Server
 We can start the sample application backend with the following command:
+
     npm run server
 This is a small Node REST API server.
 # To run the Development UI Server
 To run the frontend part of our code, we will use the Angular CLI:
+
     npm start 
 
 # run this for https
 install via mingwin: 
+
 Caleb.Widmer@CAL-WIDMER2 MINGW64 /c/Repos/github/ngrx-course-mine/ssl (1-start)
+
+```
 $ ./generateSslCert.sh
+```
+
 
 
 Install Certificate > Current User > Place all Certificates in the following store > Browse > Trusted Root Certification Authorities > Ok
 
-
-
+------------------------------
+------------------------------
+------------------------------
 
 ## Ngrx (with NgRx Data) - The Complete Guide
 
