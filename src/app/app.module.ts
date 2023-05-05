@@ -13,55 +13,63 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {RouterModule, Routes} from '@angular/router';
 import {AuthModule} from './auth/auth.module';
-import {StoreModule} from '@ngrx/store'; 
- 
+import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
+
+import {EffectsModule} from '@ngrx/effects';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { metaReducers, reducers } from './reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { EntityDataModule } from '@ngrx/data';
-import { entityConfig } from './entity-metadata';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import {metaReducers, reducers} from './reducers';
+import {AuthGuard} from './auth/auth.guard';
 
 
 const routes: Routes = [
-  {
-    path: 'courses',
-    loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule)
-  },
-  {
-    path: '**',
-    redirectTo: '/'
-  }
+    {
+        path: 'courses',
+        loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule),
+        canActivate: [AuthGuard]
+    },
+    {
+        path: '**',
+        redirectTo: '/'
+    }
 ];
 
 
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
-    HttpClientModule,
-    MatMenuModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatProgressSpinnerModule,
-    MatListModule,
-    MatToolbarModule,
-    AuthModule.forRoot(),
-    StoreModule.forRoot(reducers,{metaReducers}),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([]),
-    EntityDataModule.forRoot(entityConfig),
-    StoreRouterConnectingModule.forRoot()
-
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+        HttpClientModule,
+        MatMenuModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatProgressSpinnerModule,
+        MatListModule,
+        MatToolbarModule,
+        AuthModule.forRoot(),
+        StoreModule.forRoot(reducers, {
+            metaReducers,
+            runtimeChecks : {
+                strictStateImmutability: true,
+                strictActionImmutability: true,
+                strictActionSerializability: true,
+                strictStateSerializability:true
+            }
+        }),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+        EffectsModule.forRoot([]),
+        StoreRouterConnectingModule.forRoot({
+            stateKey: 'router',
+            routerState: RouterState.Minimal
+        })
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
