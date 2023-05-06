@@ -8,3 +8,6 @@ export const login = createAction(
 );
 
 //const newLoginAction = login( );
+export const logout =createAction(
+  "[Top Menu] Logout"
+)
