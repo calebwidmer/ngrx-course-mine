@@ -14,4 +14,4 @@ ng add @ngrx/router-store@15.0.0
 
 
 Google
-https://chrome.google.com/webstore/detail/redux-devtools
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
