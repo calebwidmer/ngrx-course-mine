@@ -58,8 +58,8 @@ const routes: Routes = [
     AuthModule.forRoot(),
     StoreModule.forRoot(reducers,{metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([]),
-    EntityDataModule.forRoot(entityConfig),
+    EffectsModule.forRoot([]), // already present for lesson 18
+    //EntityDataModule.forRoot(entityConfig), //bled in from later lesson
     StoreRouterConnectingModule.forRoot()
 
   ],
