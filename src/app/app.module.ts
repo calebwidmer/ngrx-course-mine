@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AuthGuard } from './auth/auth.guard';
 
 
@@ -60,7 +60,9 @@ const routes: Routes = [
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot([]), // already present for lesson 18
     //EntityDataModule.forRoot(entityConfig), //bled in from later lesson
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot({stateKey:'router',
+    routerState:RouterState.Minimal}
+    )
 
   ],
   bootstrap: [AppComponent]
