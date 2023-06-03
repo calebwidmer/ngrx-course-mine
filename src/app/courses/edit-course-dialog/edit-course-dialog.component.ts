@@ -7,6 +7,7 @@ import {CoursesHttpService} from '../services/courses-http.service';
 import { AppState } from '../../reducers';
 import { Store } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
+import { courseUpdated } from '../course.actions';
 
 @Component({
   selector: 'course-dialog',
@@ -77,7 +78,3 @@ this.dialogRef.close();
 
 
 }
-function courseUpdated(arg0: { update: import("@ngrx/entity/src/models").UpdateNum<Course>; }): any {
-  throw new Error('Function not implemented.');
-}
-

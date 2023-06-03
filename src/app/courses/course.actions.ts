@@ -11,7 +11,7 @@ export const allCoursesLoaded = createAction(
   props<{courses: Course[]}>()
 );
 
-export const coursUpdated = createAction(
+export const courseUpdated = createAction(
   "[Edit Course Dialog] Course Updated",
   props<{update: Update<Course>}>()
 );
