@@ -16,3 +16,6 @@ initialCourseState,
 on(CourseActions.allCoursesLoaded,
    (state,action) => adapter.setAll(action.courses, state))
 );
+
+export const {selectAll} = adapter.getSelectors();
+ 
